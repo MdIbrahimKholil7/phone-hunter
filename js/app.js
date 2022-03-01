@@ -19,6 +19,8 @@ searchBtn.addEventListener('click', () => {
 
 // showing fetch data 
 const showData = (data) => {
+    let validate=(data.length === 0) ? alert('no result found'):console.log('result found')
+
     // adding search length 
     searchLength.innerHTML = `
             <h3>${data.length} Matches Result Found With Your Search</h3>
@@ -57,8 +59,14 @@ const showDetails = (id) => {
 }
 // show details phone 
 const showDetailsPhone = (id) => {
+    // 
+    // console.log(...sensor)
+
+    // debugger
     showCard.textContent=''
     const details = id;
+    const a=details.others
+    // console.log(a.WLAN)
     console.log(details)
     const div = document.createElement('div');
     const classes = ['card', 'custom-property', 'details-card', 'cols-md-8']
@@ -77,20 +85,20 @@ const showDetailsPhone = (id) => {
             <p><span class="brand-name">Display Size: </span>6.7 inch</p>
             <p><span class="brand-name">Memory: </span><small>128GB 6GB RAM, 256GB 6GB RAM, 512GB 6GB
                     RAM, 1TB 6GB RAM"</small></p>
-            <p><span class="brand-name">Sensors: </span></p>
+            <p id='sensor'><span id='sensor' class="brand-name">Sensors: </span></p>
         </div>
         <div class="others-information">
             <h6 class="text-center mb-4">Others Information</h6>
             <div class="information d-flex justify-content-between ">
             <div class="w-50 left-border pe-3">
-            <p><span class="brand-name">WLAN: </span><small>${details.others.WLAN}</small></p>
-            <p><span class="brand-name">Bluetooth: </span><small>${details.others.Bluetooth}</small></p>
-            <p><span class="brand-name">GPS: </span><small>${details.others.GPS}</small></p>
+            <p><span class="brand-name">WLAN: </span><small></small></p>
+            <p><span class="brand-name">Bluetooth: </span><small>${details ?.others?.Bluetooth? details?.others?.Bluetooth:'no result'}</small></p>
+            <p><span class="brand-name">GPS: </span><small>${details?.others?.GPS ? details?.others?.GPS:'No result'}</small></p>
         </div>
         <div class="w-50 ps-1">
-            <p><span class="brand-name">NFC: </span><small>${details.others.NFC}</small></p>
-            <p><span class="brand-name">Radio: </span><small>${details.others.Radio}</small></p>
-            <p><span class="brand-name">USB: </span><small>${details.others.USB}</small></p>
+            <p><span class="brand-name">NFC: </span><small>${details?.others?.NFC ? details?.others?.NFC:'No result'}</small></p>
+            <p><span class="brand-name">Radio: </span><small>${details?.others?.Radio ? details?.others?.Radio:'No result'}</small></p>
+            <p><span class="brand-name">USB: </span><small>${details?.others?.USB ? details?.others?.USB:'no result'}</small></p>
         </div>
             </div>
         </div>
@@ -98,6 +106,24 @@ const showDetailsPhone = (id) => {
 
     `
     showCard.appendChild(div)
+
+    // let sensor=id.mainFeatures.sensors
+    // const sensorId=document.getElementById('sensor')
+    // for(let sens of sensor){
+    //     const span=document.createElement('span')
+    //     span.classList.add('brand-name')
+    //     sensorTxt.innerText=sens
+    //     console.log(sens)
+    // }
+    // console.log(sensor)
+
+
+
+
+
+
+
+
     console.log()
     console.log(id)
 }
