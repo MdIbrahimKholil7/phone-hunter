@@ -24,7 +24,7 @@ searchBtn.addEventListener('click', () => {
 
 // showing fetch data 
 const showData = (data) => {
-
+    
     let cutItem = data.slice(0, 20);
     let cutRemainingItem = data.slice(20, data.length)
     console.log(cutRemainingItem[1])
@@ -66,25 +66,21 @@ const showData = (data) => {
     const div = document.createElement('div');
     div.classList.add('text-center')
     div.innerHTML = `
-            <button onclick='showAllData()' class='show-all'>Shown All</button>
+            <button onclick='showAllData("${data}")' class='show-all'>Show All</button>
         `
     searchParent.appendChild(div)
     console.log(data)
 }
 
-
-
-
 // showing all data 
-const showAllData = () => {
+const showAllData = (num) => {
+    
+    console.log(num)
     const url = ` https://openapi.programming-hero.com/api/phones?search=${inputField.value.toLowerCase()}`;
     fetch(url)
         .then(res => res.json())
         .then(data => console.log(data.data))
 }
-
-
-
 
 // show details by id
 const showDetails = (id) => {
