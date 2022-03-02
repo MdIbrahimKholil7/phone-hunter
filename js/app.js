@@ -19,6 +19,7 @@ searchBtn.addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
             showData(data.data)
+            // console.log(data.data)
             seeMore(data.data)
         });
     spinner.style.display = 'block'
@@ -81,7 +82,7 @@ const seeMore = (data) => {
     // console.log(remainingSlice)
 
     showBtn.addEventListener('click', (e) => {
-        showBtn.innerText='Show Less'
+        // showBtn.innerText='Show Less'
         console.log(remainingSlice)
         remainingSlice.forEach(elem => {
             console.log(elem)
