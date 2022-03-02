@@ -6,17 +6,25 @@ const inputField = document.getElementById('search-field');
 const searchLength = document.getElementById('search-length')
 const showCard = document.getElementById('show-details')
 const searchParent = document.getElementById('search-parent');
-const spinner = document.querySelector('.spinner')
+const spinner = document.querySelector('.spinner');
+const showBtn = document.getElementById('show-all');
+const showLessParent=document.getElementById('show-less-parent');
+const showLessBtn=document.getElementById('show-less')
+showLessParent.style.display='none'
+// console.log(showBtn)
 // searching element by btn
 searchBtn.addEventListener('click', () => {
     const url = ` https://openapi.programming-hero.com/api/phones?search=${inputField.value.toLowerCase()}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => showData(data.data));
-    spinner.style.display='block'
+        .then(data => {
+            showData(data.data)
+            seeMore(data.data)
+        });
+    spinner.style.display = 'block'
     // clear input field and container 
     inputField.value = '';
-    searchParent.textContent=''
+    // searchParent.textContent=''
     searchContainer.textContent = '';
     showCard.textContent = ''
     searchLength.textContent = ''
@@ -24,27 +32,27 @@ searchBtn.addEventListener('click', () => {
 
 // showing fetch data 
 const showData = (data) => {
-    
+
     let cutItem = data.slice(0, 20);
     let cutRemainingItem = data.slice(20, data.length)
-    console.log(cutRemainingItem[1])
+    // console.log(cutRemainingItem[1])
     if (data.length === 0) {
         searchLength.innerHTML = `
             No Result Found With Your Search
         `
-        
-        spinner.style.display='none'
+        searchParent.style.display = 'none'
+        spinner.style.display = 'none'
         return searchLength;
     } else {
         // adding search length 
         searchLength.innerHTML = `
     <h3>${data.length} Matches Result Found With Your Search</h3>
 `
-        console.log(data.length)
+        // console.log(data.length)
         cutItem.forEach(elem => {
             // create div 
             const div = document.createElement('div');
-            const classes=['col']
+            const classes = ['col']
             div.classList.add(...classes);
             div.innerHTML = `
             <div class="card custom-property">
@@ -61,25 +69,74 @@ const showData = (data) => {
             // append the creating element 
             searchContainer.appendChild(div)
         })
-        spinner.style.display='none'
+        spinner.style.display = 'none'
+        searchParent.style.display = 'block'
     }
-    const div = document.createElement('div');
-    div.classList.add('text-center')
-    div.innerHTML = `
-            <button onclick='showAllData("${data}")' class='show-all'>Show All</button>
-        `
-    searchParent.appendChild(div)
-    console.log(data)
 }
 
-// showing all data 
-const showAllData = (num) => {
-    
-    console.log(num)
-    const url = ` https://openapi.programming-hero.com/api/phones?search=${inputField.value.toLowerCase()}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => console.log(data.data))
+// see more fucntion 
+const seeMore = (data) => {
+    // console.log(data);
+    const remainingSlice = data.slice(20, data.length);
+    // console.log(remainingSlice)
+
+    showBtn.addEventListener('click', (e) => {
+        showBtn.innerText='Show Less'
+        console.log(remainingSlice)
+        remainingSlice.forEach(elem => {
+            console.log(elem)
+            // create div 
+            const div = document.createElement('div');
+            const classes = ['col']
+            div.classList.add(...classes);
+            div.innerHTML = `
+            <div class="card custom-property">
+                <div class="img">
+                    <img width="180px" src="${elem.image}" alt="">
+                </div>
+                <div class="card-body">
+                    <p><span class="brand-name">Brand:</span>${elem.brand}</p>
+                    <p><span class="brand-name">Name:</span>${elem.phone_name}</p>
+                    <button onclick="showDetails('${elem.slug}')" class="details-btn">Details</button>
+                </div>
+            </div>
+`
+            searchContainer.appendChild(div)
+        })
+        searchParent.style.display='none';
+        // showLessParent.style.display='block'
+
+       /*  showLessBtn.addEventListener('click',()=>{
+            
+            searchContainer.textContent=""
+            const twentySlice=data.slice(0,20);
+            twentySlice.forEach(elem => {
+
+                // create div 
+            const div = document.createElement('div');
+            const classes = ['col']
+            div.classList.add(...classes);
+            div.innerHTML = `
+            <div class="card custom-property">
+                <div class="img">
+                    <img width="180px" src="${elem.image}" alt="">
+                </div>
+                <div class="card-body">
+                    <p><span class="brand-name">Brand:</span>${elem.brand}</p>
+                    <p><span class="brand-name">Name:</span>${elem.phone_name}</p>
+                    <button onclick="showDetails('${elem.slug}')" class="details-btn">Details</button>
+                </div>
+            </div>
+            `
+            // append the creating element 
+            searchContainer.appendChild(div)
+            
+            })
+            showLessParent.style.display='none'
+            searchParent.style.display='block';
+        })
+         */
+    })
 }
 
 // show details by id
