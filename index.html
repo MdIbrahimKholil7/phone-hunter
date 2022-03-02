@@ -15,30 +15,41 @@
 
 <body>
     <main class="p-5">
+        <div class="spinner">
+            <div id="spinner">
+                <div class="spinner-border mb-5" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
         <div class="mb-5 mt-2 ">
             <h2 class="text-center">Rengvo Phone</h2>
         </div>
         <!-- search box  -->
-        <div class="input-group mb-5 w-50 mx-auto">
-            <input id="search-field" type="text" class="form-control" placeholder="Search your phone"
+        <div class="input-group mb-5 w-50 mx-auto text-center search">
+            <input id="search-field" type="text" class="" placeholder="Search your phone"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button id="search-btn" class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+            <button id="search-btn" class="" type="button" id="button-addon2">Search</button>
         </div>
 
         <!-- show search result container  -->
         <section class="container">
             <div id="search-length" class="text-center mb-5 mt-5">
             </div>
-            <!-- show details phone start  -->
+            <!-- show details phone id  -->
             <div id="show-details" class="row row-cols-1">
-              
+
             </div>
             <!-- create cards -->
-            <div id="search-container" class="row row-cols-1 row-cols-md-3 g-5">
+               
+            <div id="search-container" class="row row-cols-1 row-cols-md-3 g-4">
+            
+            </div>
+            <div id="search-parent">
+    
             </div>
         </section>
-
-
+        
 
     </main>
 
