@@ -8,12 +8,16 @@ const showCard = document.getElementById('show-details')
 const searchParent = document.getElementById('search-parent');
 const spinner = document.querySelector('.spinner');
 const showBtn = document.getElementById('show-all');
-const showLessParent=document.getElementById('show-less-parent');
-const showLessBtn=document.getElementById('show-less')
-showLessParent.style.display='none'
+const showLessParent = document.getElementById('show-less-parent');
+const showLessBtn = document.getElementById('show-less')
+showLessParent.style.display = 'none'
 // console.log(showBtn)
+
+// console.log(inputField.value)
+const inputValue = inputField.value;
 // searching element by btn
 searchBtn.addEventListener('click', () => {
+    console.log(inputField.value)
     const url = ` https://openapi.programming-hero.com/api/phones?search=${inputField.value.toLowerCase()}`;
     fetch(url)
         .then(res => res.json())
@@ -22,6 +26,10 @@ searchBtn.addEventListener('click', () => {
             // console.log(data.data)
             seeMore(data.data)
         });
+
+    // see more 
+
+    showLessParent.style.display = 'none'
     spinner.style.display = 'block'
     // clear input field and container 
     inputField.value = '';
@@ -66,7 +74,8 @@ const showData = (data) => {
                     <button onclick="showDetails('${elem.slug}')" class="details-btn">Details</button>
                 </div>
             </div>
-`
+`       
+            // append child with the parent element 
             // append the creating element 
             searchContainer.appendChild(div)
         })
@@ -76,11 +85,9 @@ const showData = (data) => {
 }
 
 // see more fucntion 
-const seeMore = (data) => {
-    // console.log(data);
+function seeMore(data) {
+    console.log(data)
     const remainingSlice = data.slice(20, data.length);
-    // console.log(remainingSlice)
-
     showBtn.addEventListener('click', (e) => {
         // showBtn.innerText='Show Less'
         console.log(remainingSlice)
@@ -104,20 +111,20 @@ const seeMore = (data) => {
 `
             searchContainer.appendChild(div)
         })
-        searchParent.style.display='none';
-        // showLessParent.style.display='block'
+        searchParent.style.display = 'none';
+        showLessParent.style.display = 'block'
 
-       /*  showLessBtn.addEventListener('click',()=>{
-            
-            searchContainer.textContent=""
-            const twentySlice=data.slice(0,20);
+        showLessBtn.addEventListener('click', () => {
+
+            searchContainer.textContent = ""
+            const twentySlice = data.slice(0, 20);
             twentySlice.forEach(elem => {
 
                 // create div 
-            const div = document.createElement('div');
-            const classes = ['col']
-            div.classList.add(...classes);
-            div.innerHTML = `
+                const div = document.createElement('div');
+                const classes = ['col']
+                div.classList.add(...classes);
+                div.innerHTML = `
             <div class="card custom-property">
                 <div class="img">
                     <img width="180px" src="${elem.image}" alt="">
@@ -129,15 +136,25 @@ const seeMore = (data) => {
                 </div>
             </div>
             `
-            // append the creating element 
-            searchContainer.appendChild(div)
-            
+                // append the creating element 
+                searchContainer.appendChild(div)
+
             })
-            showLessParent.style.display='none'
-            searchParent.style.display='block';
+            showLessParent.style.display = 'none'
+            searchParent.style.display = 'block';
         })
-         */
+
     })
+
+    // console.log(remainingSlice)
+
+   /*    */
+}
+
+// see all more 
+const seeALLMore=data=>{
+    
+
 }
 
 // show details by id
